@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+  function promiseTest4(pay){
+    return new Promise( (ok, ng) => {
+      if(pay > 100){
+      let change = pay - 100;
+      ok(change);
+      }
+      ng('お金がたりません');
+    })
+  }
+
+  console.log(promiseTest4(80).catch( e =>{console.log(e)}));
+
+  promiseTest4(180).then( change1 =>{
+    console.log(change1);
+    return promiseTest4(change1);
+  }).then(change2 =>{
+    console.log(change2);
+  }).catch(e => console.log(e));
+
+  </script>  
+</body>
+</html>
